@@ -5,6 +5,7 @@ const {postsRouter} = require("./routes/posts.routes")
 const connection =require("./configs/db");
 const { UserModel } = require("./models/User.moel");
 const { Posts} = require("./models/Posts.model");
+const PORT = process.env.mongoURL;
 const app = express();
 
 app.use(express.json());
@@ -138,8 +139,8 @@ app.delete("/posts/delete", validation,async(req, res)=>{
 app.use(validation);
 
 app.use("/users", postsRouter);
-app.listen(process.env.mongoURL, async()=>{
-    console.log("connected to 8080 port ");
+app.listen(PORT, async()=>{
+    // console.log("connected to 8080 port ");
     try{
         await connection;
         console.log("successfully connected to Mongo DB");
